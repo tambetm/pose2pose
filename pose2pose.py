@@ -68,6 +68,7 @@ def main():
 
         if not ret or frame is None:
             break
+
         rgb_resize = cv2.resize(frame, (640, 480))
 
         op.detectPose(rgb_resize)
@@ -95,22 +96,22 @@ def main():
         image_all = np.concatenate([resize(rgb_resize), resize(resize_binary), image_bgr], axis=1)
 
         if args.display == 0:
-            #cv2.imshow('pose2pose', image_normal)
+            cv2.imshow('pose2pose', image_normal)
             out.write(image_normal)
         elif args.display == 1:
-            #cv2.imshow("pose2pose", image_pose)
+            cv2.imshow("pose2pose", image_pose)
             out.write(image_pose)
         else:
-            #cv2.imshow('pose2pose', image_all)
+            cv2.imshow('pose2pose', image_all)
             out.write(image_all)
 
-        #if cv2.waitKey(1) & 0xFF == ord('q'):
-        #    break
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
     sess.close()
     cap.release()
     out.release()
-    #cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
